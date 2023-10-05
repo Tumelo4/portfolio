@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  import font family Poppins
+*/
+
+:root {
+  --electric-blue: #00BFFF;
+  --coral: #FF7F50;
+}
+
+@layer components {
+  .before-after-hover {
+    @apply  relative inline-flex justify-center items-center w-10 h-10 bg-gradient-deg 
+    rounded-full m-8 ml-0 z-10 before:bg-gradient-deg after:dark:bg-dark-primary  
+    after:dark:text-dark-secondary after:bg-light-primary after:text-light-secondary 
+    after:scale-[.88] hover:after:scale-0 before:bg-before-after after:bg-before-after;
+  }
+
+  .active {
+    @apply text-transparent-gradient
+  }
+
+  .btnLink {
+    @apply relative inline-flex justify-center items-center w-[180px] h-[48px] rounded-[40px] 
+    font-semibold cursor-pointer tracking-[1px] z-10 text-white
+    before:btnLink-before-after after:btnLink-before-after hover:before:bg-right-top hover:after:bg-right
+    active:scale-90 duration-500 ease-in-out
+  }
+
+  .input-box-style {
+    @apply min-w-[200px] w-[35%] flex-grow border-none p-6 rounded-[40px] outline-1 
+    outline dark:outline-light-primary outline-dark-primary text-black
+  }
+
+  .navItem {
+    @apply font-semibold my-2 md:my-0 hover:text-transparent-gradient md:hover:outline-0
+    hover:outline hover:outline-dark-primary dark:hover:outline-light-primary md:ml-[2rem] 
+  }
+}
+
+@layer utilities {
+  .text-transparent-gradient {
+    background: linear-gradient(45deg, var(--coral), var(--electric-blue));
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -ms-background-clip: text;
+  }
+
+  .bg-gradient-deg {
+    background: linear-gradient(45deg, var(--coral), var(--electric-blue));
+  }
+
+  .bg-before-after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    z-index: -1;
+    transition: .5s ease;
+  }
+
+  .btnLink-before-after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    inset: 0;
+    background: linear-gradient(45deg, var(--coral), var(--electric-blue), var(--coral));
+    z-index: -1;
+    border-radius: 40px;
+    background-size: 200%;
+    background-position: 0 0;
+    transition: .5s ease;
+  }
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+}
