@@ -1,9 +1,38 @@
 import Image from 'next/image';
-import picture from '@/public/tumelo.png'
-import React from 'react'
-import Link from 'next/link';
+import React, {useEffect, useState} from 'react'
+import { Box, Fade, Modal } from '@mui/material'
+import {User} from "@/app/page";
+import axios from "axios";
 
-const AboutSection = () => {
+export const styleBox = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    overflow: 'auto',
+    transform: 'translate(-50%, -50%)',
+    '&:focus': {
+        outline: 'none',
+    },
+};
+
+const AboutSection = ({occupation, about_description, imageId}:User) => {
+    const [image, setImage] = useState("");
+    const [openMore, setOpenMore] = useState(false);
+    useEffect(() => {
+        if (imageId !== "") {
+            // Define the API endpoint
+            const apiUrl = 'https://telerfi.com/api/portfolio/retrieve/' + imageId;
+            axios
+                .get(apiUrl)
+                .then((response) => {
+                    const imageData = "data:image/png;base64,"+ response.data;
+                    setImage(imageData);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    }, [imageId]);
   return (
     <section id='about' className=' pt-36 px-[3%] min-h-screen flex flex-col md:flex-row text-center md:text-left gap-8 justify-center items-center overflow-hidden'>
         {/* Image */}
@@ -11,7 +40,7 @@ const AboutSection = () => {
         <div className=' flex justify-center items-center w-80 h-80 rounded-full animate-spin-slow bg-gradient-to-r from-[#FF7F50] to-[#00BFFF]'>
           <div className=' bg-light-primary dark:bg-dark-primary w-[19rem] h-[19rem] rounded-full overflow-hidden animate-backspin'>
             <Image 
-              src={picture}
+              src={image}
               alt=''
               width={320} 
               height={320}
@@ -22,15 +51,32 @@ const AboutSection = () => {
       {/* About content */}
       <div className=' flex flex-col w-full justify-center items-center md:items-start text-center md:text-left'>
         <h1 className=' font-bold text-lg'>About <span className=' text-[#00BFFF] capitalize'>me</span></h1>
-        <h2 className=' font-semibold text-base'>Frontend Developer</h2>
-        <p className=' my-8'>As a passionate and skilled Frontend Developer, I thrive on bringing creativity and functionality to life through web development. My journey in the world of programming began with a fascination for the power of technology in shaping modern digital experiences. Since then, I have honed my skills to become proficient in the latest frontend technologies and frameworks.</p>
-        <Link 
-          href='/cv.pdf'
-          target="_blank"  
+        <h2 className=' font-semibold text-base'>{occupation}</h2>
+        <p className=' my-8 aboutText'>{about_description}</p>
+        <button
           className=' btnLink'
+          onClick={() => setOpenMore(true)}
         >
           Read More
-        </Link>
+        </button>
+
+          <Modal
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              open={openMore}
+              onClose={() => setOpenMore(false)}
+              closeAfterTransition
+          >
+              <Fade in={openMore}>
+                  <Box sx={styleBox}>
+                      {/*    */}
+                      <div className=' p-8 flex flex-col bg-light-primary dark:bg-dark-primary flex justify-center items-center text-center'>
+                          <h1 className=' font-bold text-lg'>About <span className=' text-[#00BFFF] capitalize'>me</span></h1>
+                          <p className=' my-8 mb-0'>{about_description}</p>
+                      </div>
+                  </Box>
+              </Fade>
+          </Modal>
       </div>
     </section>
   )
