@@ -1,7 +1,7 @@
 'use client'
 import { useMode } from '@/context/ModeContext'
 import { Link } from 'react-scroll';
-import React, { useState } from 'react'
+import React from 'react'
 import { BiSolidMoon, BiSolidSun } from 'react-icons/bi'
 
 
