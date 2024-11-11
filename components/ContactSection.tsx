@@ -63,7 +63,7 @@ const ContactSection = () => {
       };
 
       try {
-          const response = await axios.post('https://telerfi.com/api/portfolio/user/submit', userData, {
+          const response = await axios.post('https://telerfi-g5g9cwdrhhd4fpez.southafricanorth-01.azurewebsites.net/api/portfolio/user/submit', userData, {
               headers: headers
           });
           console.log(response);

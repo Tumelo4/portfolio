@@ -11,7 +11,7 @@ const ProjectsSection = ({projects}:User) => {
     if (projects.length !== 0) {
       const getProjects = async () => {
         const arrSkills = await Promise.all(projects.map(async (item) => {
-          const apiUrl = 'https://telerfi.com/api/portfolio/retrieve/' + item.imageId;
+          const apiUrl = 'https://telerfi-g5g9cwdrhhd4fpez.southafricanorth-01.azurewebsites.net/api/portfolio/retrieve/' + item.imageId;
           try {
             const response = await axios.get(apiUrl);
             const imageURL = "data:image/png;base64," + response.data;

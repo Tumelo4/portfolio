@@ -14,7 +14,7 @@ const HomeSection = ({name,surname,occupation,home_description,imageId,linkedinL
   useEffect(() => {
     if (imageId !== "") {
       // Define the API endpoint
-      const apiUrl = 'https://telerfi.com/api/portfolio/retrieve/' + imageId;
+      const apiUrl = 'https://telerfi-g5g9cwdrhhd4fpez.southafricanorth-01.azurewebsites.net/api/portfolio/retrieve/' + imageId;
       axios
           .get(apiUrl)
           .then((response) => {

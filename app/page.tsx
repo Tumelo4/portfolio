@@ -57,7 +57,7 @@ const Home = () => {
 
   useEffect(() => {
     // Define the API endpoint
-    const apiUrl = 'https://telerfi.com/api/portfolio/user/details';
+    const apiUrl = 'https://telerfi-g5g9cwdrhhd4fpez.southafricanorth-01.azurewebsites.net/api/portfolio/user/details';
     axios
         .get(apiUrl)
         .then((response) => {

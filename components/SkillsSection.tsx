@@ -10,7 +10,7 @@ const SkillsSection = ({skills}:User) => {
     if (skills.length !== 0) {
         const getSkills = async () => {
             const arrSkills = await Promise.all(skills.map(async (item) => {
-                const apiUrl = 'https://telerfi.com/api/portfolio/retrieve/' + item.imageId;
+                const apiUrl = 'https://telerfi-g5g9cwdrhhd4fpez.southafricanorth-01.azurewebsites.net/api/portfolio/retrieve/' + item.imageId;
 
                 try {
                     const response = await axios.get(apiUrl);
